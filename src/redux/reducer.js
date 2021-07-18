@@ -1,4 +1,9 @@
-const initialState = [];
+const initialState = [
+  {
+    title: "sdf",
+    description: "sdfh",
+  },
+];
 
 export function blogs(state = initialState, action) {
   console.log(state, action);

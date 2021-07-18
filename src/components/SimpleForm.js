@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addBlog } from "../redux/action";
-
+import {UserContext} from '../context/UserContext'
 class SimpleForm extends Component {
   constructor(props) {
     super(props);
@@ -29,19 +29,26 @@ class SimpleForm extends Component {
   render() {
     const { title, description } = this.state;
     return (
-      <>
-        <form onSubmit={this.onFormSubmit}>
-          <input
-            value={title}
-            onChange={(e) => this.onInputChange("title", e.target.value)}
-          />
-          <textarea
-            value={description}
-            onChange={(e) => this.onInputChange("description", e.target.value)}
-          ></textarea>
-          <input type="submit" />
-        </form>
-      </>
+      <UserContext.Consumer>
+        {(data) => {
+          const { user } = data;
+          return (
+            <form onSubmit={this.onFormSubmit}>
+              <input
+                value={title || user.name}
+                onChange={(e) => this.onInputChange("title", e.target.value)}
+              />
+              <textarea
+                value={description || user.lastName}
+                onChange={(e) =>
+                  this.onInputChange("description", e.target.value)
+                }
+              ></textarea>
+              <input type="submit" />
+            </form>
+          );
+        }}
+      </UserContext.Consumer>
     );
   }
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Form from "./components/Form";
 import Home from "./pages/Home";
+import {UserContext} from './context/UserContext'
+
 class App extends Component {
   xyz = {
     title: "title 1",
@@ -9,9 +11,11 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Home />
-      </div>
+      <UserContext.Provider value={{ user: { name: "abc", lastName: "xyz" } }}>
+        <div>
+          <Home />
+        </div>
+      </UserContext.Provider>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { removeBlog } from "../redux/action";
+import axios from "axios";
 class BlogList extends PureComponent {
   constructor(props) {
     super(props);
@@ -8,11 +9,25 @@ class BlogList extends PureComponent {
   }
   onDelete = (title) => {
     const allBlogs = [...this.props.blogs];
-    const filteredBlogs = allBlogs.filter(
-      (blog) => blog.title !== title
-    );
+    const filteredBlogs = allBlogs.filter((blog) => blog.title !== title);
     this.props.removeBlog(filteredBlogs);
   };
+
+  async componentDidMount() {
+    try {
+      const data = await axios.get("https://picsum.photos/v2/list?limit=10");
+      console.log(data.data,"await");
+    } catch (e) {
+      console.log(e);
+    }
+    console.log("did mount await");
+
+    axios
+      .get("https://picsum.photos/v2/list?limit=10")
+      .then((data) => console.log(data.data,"then"));
+    console.log("did mount then");
+  }
+
   render() {
     console.log(this.props);
     return (
