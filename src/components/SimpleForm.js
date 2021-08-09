@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addBlog } from "../redux/action";
-import {UserContext} from '../context/UserContext'
+import { UserContext } from "../context/UserContext";
+import axios from "axios";
 class SimpleForm extends Component {
   constructor(props) {
     super(props);
@@ -15,8 +16,22 @@ class SimpleForm extends Component {
     this.setState({ [key]: value });
   };
 
-  onFormSubmit = (e) => {
+  onFormSubmit = async (e) => {
     e.preventDefault();
+    const reqData = {
+      product_id: 123,
+      product_name: "product 1",
+    };
+    const config = {
+      Authorization: 'Basic YWRtaW46YWRtaW5AMTIz'
+    };
+
+    const {data} = await axios.post("http://localhost:3001/product", reqData,{
+      headers:config
+    });
+
+    console.log(data);
+
     const { title, description } = this.state;
     const dataObj = {
       title,

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import {SimpleFormWithHooks} from "../components/SimpleFormWithHooks";
+import SimpleForm from "../components/SimpleForm";
 import BlogList from "../components/BlogList";
 
 class Home extends React.Component {
@@ -15,7 +15,7 @@ class Home extends React.Component {
           <Route
             path="/"
             exact
-            render={(params) => <SimpleFormWithHooks {...params} />}
+            render={(params) => <SimpleForm {...params} />}
           />
           <Route path="/about">
             <About />
