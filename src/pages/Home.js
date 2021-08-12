@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import SimpleForm from "../components/SimpleForm";
 import BlogList from "../components/BlogList";
-
+import Login from './Login'
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +16,10 @@ class Home extends React.Component {
             path="/"
             exact
             render={(params) => <SimpleForm {...params} />}
+          />
+           <Route
+            path="/login"
+            render={(params) => <Login {...params} />}
           />
           <Route path="/about">
             <About />

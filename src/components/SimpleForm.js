@@ -18,14 +18,15 @@ class SimpleForm extends Component {
 
   onFormSubmit = async (e) => {
     e.preventDefault();
+
+    const token = localStorage.getItem('token');
+    const config = {
+      Authorization: 'Bearer '+token
+    };
     const reqData = {
       product_id: 123,
-      product_name: "product 1",
+      product_name: "product 1"
     };
-    const config = {
-      Authorization: 'Basic YWRtaW46YWRtaW5AMTIz'
-    };
-
     const {data} = await axios.post("http://localhost:3001/product", reqData,{
       headers:config
     });
@@ -37,8 +38,8 @@ class SimpleForm extends Component {
       title,
       description,
     };
-    this.props.insertBlog(dataObj);
-    this.props.history.push("/blog");
+    // this.props.insertBlog(dataObj);
+    // this.props.history.push("/blog");
   };
 
   render() {
