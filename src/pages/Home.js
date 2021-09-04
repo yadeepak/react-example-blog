@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import SimpleForm from "../components/SimpleForm";
-import BlogList from "../components/BlogList";
+import BlogList from "./BlogList";
 import Login from './Login'
+import AddBlog from './AddBlog';
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class Home extends React.Component {
           <Route
             path="/"
             exact
-            render={(params) => <SimpleForm {...params} />}
+            render={(params) => <AddBlog {...params} />}
           />
            <Route
             path="/login"
@@ -27,7 +28,7 @@ class Home extends React.Component {
           <Route path="/contact">
             <Contact />
           </Route>
-          <Route path="/blog">
+          <Route path="/blogs">
             <BlogList />
           </Route>
         </Switch>
@@ -39,7 +40,7 @@ class Home extends React.Component {
             <Link to="contact">Contact</Link>
           </li>
           <li>
-            <Link to="blog">Blog</Link>
+            <Link to="blogs">Blogs</Link>
           </li>
           <li>
             <Link to="/">Back to home</Link>

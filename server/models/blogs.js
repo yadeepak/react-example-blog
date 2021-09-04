@@ -5,6 +5,14 @@ const blogsSchema = new Schema({
     author:{
         type:String,
         required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    image:{
+        type:String,
+        required:false 
     }
 });
 const Blog = mongoose.model('Blog', blogsSchema);

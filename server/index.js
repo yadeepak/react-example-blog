@@ -52,21 +52,23 @@ function auth_middleware(req, res, next) {
 }
 
 // app.use(auth_middleware);
-app.get("/add-blog", (req, resp) => {
-  // console.log(req.query);
-  const blogObj = {
-    title:"abc"
-  };
+app.post("/add-blog", (req, resp) => {
+  const blogObj = req.body;
   try{ 
     const blog = new Blog(blogObj);
     blog.save();
+    return resp.json({success:true});
   }catch(e){
     console.log(e);
+    return resp.json({success:false,error:e})
   }
-
-  // db.blogs.insert(blogObj);
-  return resp.send(`<h1>added</h1>`);
 });
+
+app.get("/blogs",(req,res)=>{
+  const blogs = Blog.find({});
+  return blogs;
+
+})
 
 app.get("/pages/:pageName/", (req, resp) => {
   // console.log(req.query);
