@@ -54,26 +54,58 @@ function auth_middleware(req, res, next) {
 // app.use(auth_middleware);
 app.post("/add-blog", (req, resp) => {
   const blogObj = req.body;
-  try{ 
+  try {
     const blog = new Blog(blogObj);
     blog.save();
-    return resp.json({success:true});
-  }catch(e){
+    return resp.json({ success: true });
+  } catch (e) {
     console.log(e);
-    return resp.json({success:false,error:e})
+    return resp.json({ success: false, error: e });
   }
 });
 
-app.get("/blogs",(req,res)=>{
-  const blogs = Blog.find({});
-  return blogs;
+app.put("/update-blog/:title", async (req, resp) => {
+  const blogObj = req.body;
+  const title = req.params.title;
+  try {
+    const response = await Blog.findOneAndUpdate({ title }, blogObj, {
+      new: true,
+    });
+    if (response) {
+      return resp.json({ success: true, response });
+    } else {
+      return resp.json({ success: false, error: e });
+    }
+  } catch (e) {
+    console.log(e);
+    return resp.json({ success: false, error: e });
+  }
+});
 
-})
+app.get("/allblogs", async (req, res) => {
+  const blogs = await Blog.find({});
+  return res.json(blogs);
+});
+
+app.delete("/blog/remove/:blogId", async (req, res) => {
+  const blogId = req.params.blogId;
+  const response = await Blog.findByIdAndDelete(blogId);
+  if (response) {
+    return res.status(200).json({ success: true });
+  }
+  return res.status(500).json({ success: false });
+});
+
+app.get("/get-blog-by-title", async (req, res) => {
+  const blog = await Blog.findOne({ title: req.query.title });
+  return res.status(200).json(blog);
+});
 
 app.get("/pages/:pageName/", (req, resp) => {
   // console.log(req.query);
   return resp.send(`<h1>${req.params.pageName}</h1>`);
 });
+
 app.post("/product", auth_middleware, (req, res) => {
   console.log(req.body);
   const data = req.body;

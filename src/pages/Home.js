@@ -2,8 +2,9 @@ import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import SimpleForm from "../components/SimpleForm";
 import BlogList from "./BlogList";
-import Login from './Login'
-import AddBlog from './AddBlog';
+import Login from "./Login";
+import AddBlog from "./AddBlog";
+import UpdateBlog from "./UpdateBlog";
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -13,15 +14,8 @@ class Home extends React.Component {
     return (
       <>
         <Switch>
-          <Route
-            path="/"
-            exact
-            render={(params) => <AddBlog {...params} />}
-          />
-           <Route
-            path="/login"
-            render={(params) => <Login {...params} />}
-          />
+          <Route path="/" exact render={(params) => <AddBlog {...params} />} />
+          <Route path="/login" render={(params) => <Login {...params} />} />
           <Route path="/about">
             <About />
           </Route>
@@ -31,16 +25,20 @@ class Home extends React.Component {
           <Route path="/blogs">
             <BlogList />
           </Route>
+          <Route
+            path="/blog/update/:title"
+            render={(params) => <UpdateBlog {...params} />}
+          />
         </Switch>
         <ul>
           <li>
-            <Link to="about">About</Link>
+            <Link to="/about">About</Link>
           </li>
           <li>
-            <Link to="contact">Contact</Link>
+            <Link to="/contact">Contact</Link>
           </li>
           <li>
-            <Link to="blogs">Blogs</Link>
+            <Link to="/blogs">Blogs</Link>
           </li>
           <li>
             <Link to="/">Back to home</Link>
