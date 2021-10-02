@@ -45,7 +45,7 @@ class Webpage extends Component {
                                 <input type="button" defaultValue="Submit" onClick={this.onSubmit} />
                             </div>
                             <div class="col-md-6">
-                                <img src="./logo512.png"></img>
+                                <img src="./logo512.png" alt="alt"></img>
                             </div>
                         </div>
                     </form>

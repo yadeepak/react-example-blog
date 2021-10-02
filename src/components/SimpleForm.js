@@ -33,11 +33,6 @@ class SimpleForm extends Component {
 
     console.log(data);
 
-    const { title, description } = this.state;
-    const dataObj = {
-      title,
-      description,
-    };
     // this.props.insertBlog(dataObj);
     // this.props.history.push("/blog");
   };

@@ -21,12 +21,12 @@ class UpdateBlog extends Component {
      const title =  this.props.match.params.title;
      const response = await axios.get(`http://localhost:3001/get-blog-by-title?title=${title}`)
      if(response && response.status === 200){
-         const {title,description,author} = response.data;
+         const {title,description,author,image} = response.data;
          const stateObj = {
              title,
              author,
              description,
-             image:"",
+             image
          }
          this.setState({forms:stateObj})
      }
@@ -88,7 +88,7 @@ class UpdateBlog extends Component {
                 <Form.Group controlId="formFile" className="mb-3">
                   <Form.Label>Image</Form.Label>
                   <Form.Control type="file" onChange={(e)=>this.handleForm("image",e.target.files[0])}/>
-                  {image && <img src={{image}}/>}
+                  {image && <img src={`http://localhost:3001/${image}`} alt="alt"/>}
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Submit

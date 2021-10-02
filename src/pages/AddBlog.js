@@ -23,10 +23,16 @@ class AddBlog extends Component {
 
   formSubmit = async (e) => {
     e.preventDefault();
-    // const { title, author, description, image } = this.state.forms;
-    const response = await axios.post(
+    const { title, author, description, image } = this.state.forms;
+    const formData = new FormData();
+    formData.append('title',title);
+    formData.append('author',author);
+    formData.append('description',description);
+    formData.append('image',image);
+
+     await axios.post(
       "http://localhost:3001/add-blog",
-      this.state.forms
+      formData
     );
   };
   render() {
@@ -37,7 +43,7 @@ class AddBlog extends Component {
           <Col lg="5" className="mx-auto">
             <Card style={{ width: "45rem" }} className="p-3">
               <h1 className="text-center">Add Blog</h1>
-              <Form onSubmit={this.formSubmit}>
+              <Form onSubmit={this.formSubmit} enctype="multipart/form-data">
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Title</Form.Label>
                   <Form.Control
@@ -85,7 +91,7 @@ class AddBlog extends Component {
                       this.handleForm("image", e.target.files[0])
                     }
                   />
-                  {image && <img src={{ image }} />}
+                  {image && <img src={{ image }} alt="dfd"/>}
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Submit

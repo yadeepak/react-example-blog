@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch, Link } from "react-router-dom";
-import SimpleForm from "../components/SimpleForm";
 import BlogList from "./BlogList";
 import Login from "./Login";
 import AddBlog from "./AddBlog";
@@ -57,6 +56,4 @@ function About() {
 function Contact() {
   return <h1>Contact</h1>;
 }
-function Blog() {
-  return <h1>Blog</h1>;
-}
+

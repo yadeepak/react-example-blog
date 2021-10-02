@@ -37,6 +37,7 @@ class BlogListv2 extends Component {
             <th>Title</th>
             <th>Author</th>
             <th>Description</th>
+            <th>image</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -53,6 +54,7 @@ class BlogListv2 extends Component {
         <td>{blog.title}</td>
         <td>{blog.author}</td>
         <td dangerouslySetInnerHTML={{ __html: blog.description }}></td>
+        <td>{blog.image ?<img src={`http://localhost:3001/${blog.image}`} width="200" height="150" alt="alt"/>:"no image"}</td>
         <td>
           <Button
             variant="danger"

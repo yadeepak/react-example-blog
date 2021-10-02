@@ -1,16 +1,20 @@
 const express = require("express");
+require('dotenv').config()
 var auth = require("basic-auth");
 var mongoose = require("mongoose");
 var jwt = require("jsonwebtoken");
 var cors = require("cors");
 var Blog = require("./models/blogs");
+var multer = require('multer');
+var fs = require("fs");
 const app = express();
-const port = 3001;
+const port = process.env.PORT;
 const private_key = "secret";
 app.use(express.json()); // for parsing application/json
+app.use("/my-uploads", express.static('my-uploads'))
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/blogs_db")
+  .connect("mongodb+srv://react-mongo:<Mongo@123@12>@cluster0.bwioy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
   .then((data) => console.log("connected"))
   .catch((err) => console.log(err));
 const db = mongoose.connection;
@@ -51,9 +55,23 @@ function auth_middleware(req, res, next) {
   next();
 }
 
+//upload images
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'my-uploads')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    cb(null, file.fieldname + '-' + uniqueSuffix+file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
+
 // app.use(auth_middleware);
-app.post("/add-blog", (req, resp) => {
-  const blogObj = req.body;
+app.post("/add-blog",upload.single('image'),(req, resp) => {
+  console.log(req.file);
+  const blogObj = {...req.body,image:req.file.path};
   try {
     const blog = new Blog(blogObj);
     blog.save();
@@ -118,7 +136,7 @@ app.post("/login", (req, res) => {
   res.json({ token });
 });
 
-app.listen(port, () => {
+app.listen(port || 3001, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 // console.log("dsfds1");
