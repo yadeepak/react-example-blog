@@ -31,7 +31,7 @@ class AddBlog extends Component {
     formData.append('image',image);
 
      await axios.post(
-      "http://localhost:3001/add-blog",
+      "https://mern-be-2.herokuapp.com/add-blog",
       formData
     );
   };

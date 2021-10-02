@@ -54,7 +54,7 @@ class BlogListv2 extends Component {
         <td>{blog.title}</td>
         <td>{blog.author}</td>
         <td dangerouslySetInnerHTML={{ __html: blog.description }}></td>
-        <td>{blog.image ?<img src={`http://localhost:3001/${blog.image}`} width="200" height="150" alt="alt"/>:"no image"}</td>
+        <td>{blog.image ?<img src={`https://mern-be-2.herokuapp.com/${blog.image}`} width="200" height="150" alt="alt"/>:"no image"}</td>
         <td>
           <Button
             variant="danger"
