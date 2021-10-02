@@ -10,7 +10,6 @@ class Login extends React.Component {
         }
     }
     onSubmit = async () => {
-        const user = [...this.state.user];
         const userObj = {
             username: this.state.username,
             password: this.state.password,
