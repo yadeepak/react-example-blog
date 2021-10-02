@@ -41,7 +41,7 @@ class UpdateBlog extends Component {
       e.preventDefault()
     // const { title, author, description, image } = this.state.forms;
     const title =  this.props.match.params.title;
-    const response = await axios.put(`http://localhost:3001/update-blog/${title}`,this.state.forms);
+    const response = await axios.put(`https://mern-be-2.herokuapp.com/update-blog/${title}`,this.state.forms);
     console.log(response);
     if(response && response.status === 200){
         alert("added")

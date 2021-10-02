@@ -12,12 +12,12 @@ const port = process.env.PORT;
 const private_key = "secret";
 app.use(express.json()); // for parsing application/json
 app.use("/my-uploads", express.static('my-uploads'))
-
-mongoose
-  .connect("mongodb+srv://react-mongo:<Mongo@123@12>@cluster0.bwioy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+const DB_USER = 'react-mongo';
+const PASSWORD = encodeURIComponent('Mongo%40123%4012'); 
+mongoose.connect(`mongodb+srv://${DB_USER}:${PASSWORD}@cluster0.bwioy.mongodb.net/myFirstDatabase?authSource=admin`)
   .then((data) => console.log("connected"))
   .catch((err) => console.log(err));
-const db = mongoose.connection;
+
 // app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // function routeMiddleware(req,res,next){

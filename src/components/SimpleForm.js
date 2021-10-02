@@ -27,7 +27,7 @@ class SimpleForm extends Component {
       product_id: 123,
       product_name: "product 1"
     };
-    const {data} = await axios.post("http://localhost:3001/product", reqData,{
+    const {data} = await axios.post("https://mern-be-2.herokuapp.com/product", reqData,{
       headers:config
     });
 

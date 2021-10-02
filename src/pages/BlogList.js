@@ -11,7 +11,7 @@ class BlogListv2 extends Component {
   }
 
   async componentDidMount() {
-    const blogsData = await axios.get("http://localhost:3001/allblogs");
+    const blogsData = await axios.get("https://mern-be-2.herokuapp.com/allblogs");
     if (blogsData.status === 200) {
       this.setState({ blogs: blogsData.data });
     }
@@ -19,7 +19,7 @@ class BlogListv2 extends Component {
 
   deleteBlog = async (id, index) => {
     const response = await axios.delete(
-      `http://localhost:3001/blog/remove/${id}`
+      `https://mern-be-2.herokuapp.com/blog/remove/${id}`
     );
     if (response && response.status === 200) {
       const cloneBlogs = [...this.state.blogs];
